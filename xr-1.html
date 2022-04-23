@@ -21,6 +21,13 @@
 		init();
 		animate();
 
+        function handleOrientation(event) {
+			updateFieldIfNotNull('Orientation_a', event.alpha);
+			updateFieldIfNotNull('Orientation_b', event.beta);
+			updateFieldIfNotNull('Orientation_g', event.gamma);
+			incrementEventCount();
+		}
+
 		function init() {
 			const container = document.createElement('div');
 			document.body.appendChild(container);
@@ -32,7 +39,7 @@
 			renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 			renderer.setPixelRatio(window.devicePixelRatio);
 			renderer.setSize(window.innerWidth, window.innerHeight);
-      // This next line is important to to enable the renderer for WebXR
+			// This next line is important to to enable the renderer for WebXR
 			renderer.xr.enabled = true; // New!
 			container.appendChild(renderer.domElement);
 
@@ -40,18 +47,23 @@
 			light.position.set(0.5, 1, 0.25);
 			scene.add(light);
 
-      const geometry = new THREE.IcosahedronGeometry(0.1, 1);
-      const material = new THREE.MeshPhongMaterial({
-        color      :  new THREE.Color("rgb(226,35,213)"),
-        shininess  :  6,
-        flatShading:  true,
-        transparent: 1,
-        opacity    : 0.8
-      });
+			const geometry = new THREE.IcosahedronGeometry(0.1, 1);
+			const material = new THREE.MeshPhongMaterial({
+				color      :  new THREE.Color("rgb(226,35,213)"),
+				shininess  :  6,
+				flatShading:  true,
+				transparent: 1,
+				opacity    : 0.8
+			});
       
-      mesh = new THREE.Mesh(geometry, material);
-      mesh.position.set(0, 0, -0.5);
-      scene.add(mesh);
+	        const centerGeometry = new THREE.Group();
+			centerGeometry.position.set(0,0,0);
+	  
+			mesh = new THREE.Mesh(geometry, material);
+			mesh.position.set(0, 0, -0.5);
+			centerGeometry.add(mesh);
+			
+			scene.add(centerGeometry);
 
 			// Add the AR button to the body of the DOM
 			document.body.appendChild(ARButton.createButton(renderer));
@@ -70,8 +82,14 @@
 			renderer.setAnimationLoop(render);
 		}
 
+        let degrees = 0;
+
+        function rotateSystem() {
+		  degrees = degrees + 0.2;
+		  centerGeometry.rotation.y = THREE.Math.degToRad(degrees);
+		}
+		
 		function render() { 
-			camera.position.set(0,0,0);
 			renderer.render(scene, camera);
 		}
 
