@@ -85,11 +85,12 @@
         let degrees = 0;
 
         function rotateSystem() {
-		  degrees = degrees + 0.2;
+		  degrees = degrees + 1;
 		  centerGeometry.rotation.y = THREE.Math.degToRad(degrees);
 		}
 		
 		function render() { 
+			rotateSystem();
 			renderer.render(scene, camera);
 		}
 
