@@ -61,7 +61,7 @@
 			centerGeometry.position.set(0,0,0);
 	  
 			mesh = new THREE.Mesh(geometry, material);
-			mesh.position.set(0, 0, -0.5);
+			mesh.position.set(0, 0, -1);
 			centerGeometry.add(mesh);
 			
 			scene.add(centerGeometry);
@@ -91,7 +91,7 @@
 		}
 		
 		function render() { 
-			rotateSystem();
+			//rotateSystem();
 			renderer.render(scene, camera);
 		}
 
