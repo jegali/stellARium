@@ -244,8 +244,7 @@
         let degrees = 0;
 
         function rotateSystem() {
-		  degrees = degrees + 1;
-		  centerGeometry.rotation.y = THREE.Math.degToRad(degrees);
+		  centerGeometry.rotation.y = THREE.Math.degToRad(heading-90);
 		}
 		
 		function render() { 
