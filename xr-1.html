@@ -11,16 +11,7 @@
 
 <body>
 
-	<script type="module">
-    // To start an AR scene with webXR, we can use a handy button provided by three.js
-    // We first have to import it because it is a javascript module
-    import { ARButton } from 'https://unpkg.com/three@0.126.0/examples/jsm/webxr/ARButton.js';
-    
-		let camera, scene, renderer;
-		let centerGeometry;
-        let mesh;
-        let northMesh, eastMesh, southMesh, westMesh;
-
+    <script>
 		window.onload = function () {
 			// Check if is IOS 13 when page loads.
 			if ( window.DeviceMotionEvent && typeof window.DeviceMotionEvent.requestPermission === 'function' ){
@@ -56,23 +47,20 @@
 			})
 			.catch(e => {
 			  console.error(e)
-			})
-			
-		}
+			})			
+		}	
+	</script>
 
+	<script type="module">
+    // To start an AR scene with webXR, we can use a handy button provided by three.js
+    // We first have to import it because it is a javascript module
+    import { ARButton } from 'https://unpkg.com/three@0.126.0/examples/jsm/webxr/ARButton.js';
+    
+		let camera, scene, renderer;
+		let centerGeometry;
+        let mesh;
+        let northMesh, eastMesh, southMesh, westMesh;
 
-
-//  if (
-//    DeviceMotionEvent &&
-//    typeof DeviceMotionEvent.requestPermission === "function"
-//  ) {
-//    DeviceMotionEvent.requestPermission();
-//  }
-//DeviceMotionEvent.requestPermission();
-//DeviceOrientationEvent.requestPermission();
-
-		//window.addEventListener("devicemotion", handleMotion);
-        //window.addEventListener("deviceorientation", handleOrientation);
 		init();
 		animate();
 
