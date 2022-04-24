@@ -238,10 +238,9 @@
 		}
 
 		function animate() {
+		    centerGeometry.rotation.y = THREE.Math.degToRad(180);
 			renderer.setAnimationLoop(render);
 		}
-
-        let degrees = 0;
 
         function rotateSystem() {
 		  //centerGeometry.rotation.y = THREE.Math.degToRad(heading-90);
