@@ -68,6 +68,8 @@
 			})			
 		}	
 
+		var magnetoSensor = new Magnetometer();
+		magnetoSensor.start();
 
 		init();
 		animate();
@@ -81,6 +83,9 @@
 			gamma = event.gamma;
 			heading = compassHeading(event.alpha, event.beta, event.gamma);
 			updateFieldIfNotNull('Orientation_heading', heading);
+			
+			var magHeading = Math.atan2(magnetoSensor.y, magnetoSensor.x) * (180 / Math.PI);
+			updateFieldIfNotNull('Orientation_headingmag', magHeading);			
 		}
 
         const compassHeading = (alpha, beta, gamma) => {
@@ -238,7 +243,6 @@
 		}
 
 		function animate() {
-		    centerGeometry.rotation.y = THREE.Math.degToRad(180);
 			renderer.setAnimationLoop(render);
 		}
 
@@ -259,7 +263,8 @@
 	  <li>X-axis (&beta;): <span id="Orientation_b">0</span><span>&deg;</span></li>
 	  <li>Y-axis (&gamma;): <span id="Orientation_g">0</span><span>&deg;</span></li>
 	  <li>Z-axis (&alpha;): <span id="Orientation_a">0</span><span>&deg;</span></li>
-	  <li>compassHeading: <span id="Orientation_heading">0</span><span>&deg;</span></li>
+	  <li>compassHeadingOr: <span id="Orientation_heading">0</span><span>&deg;</span></li>
+	  <li>compassHeadingMag: <span id="Orientation_headingmag">0</span><span>&deg;</span></li>
 	</ul>
 	</div>
 	
