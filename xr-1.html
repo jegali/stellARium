@@ -60,6 +60,7 @@
 		let centerGeometry;
         let mesh;
         let northMesh, eastMesh, southMesh, westMesh;
+        let alpha=0, beta=0, gamma=0;
 
 		init();
 		animate();
@@ -68,6 +69,9 @@
 			updateFieldIfNotNull('Orientation_a', event.alpha);
 			updateFieldIfNotNull('Orientation_b', event.beta);
 			updateFieldIfNotNull('Orientation_g', event.gamma);
+			alpha = event.alpha;
+			beta = event.beta;
+			gamma = event.gamma;
 		}
 
 		function handleMotion(event) {
@@ -171,9 +175,8 @@
 			
 			scene.add(centerGeometry);
 
-			if (event != null) {
-				centerGeometry.rotation.y = event.alpha;
-			}
+			centerGeometry.rotation.y = alpha;
+	
 
 			// Add the AR button to the body of the DOM
 			document.body.appendChild(ARButton.createButton(renderer));
