@@ -21,12 +21,14 @@
         let mesh;
         let northMesh, eastMesh, southMesh, westMesh;
 
-  if (
-    DeviceMotionEvent &&
-    typeof DeviceMotionEvent.requestPermission === "function"
-  ) {
-    DeviceMotionEvent.requestPermission();
-  }
+//  if (
+//    DeviceMotionEvent &&
+//    typeof DeviceMotionEvent.requestPermission === "function"
+//  ) {
+//    DeviceMotionEvent.requestPermission();
+//  }
+DeviceMotionEvent.requestPermission();
+DeviceOrientationEvent.requestPermission();
 
 		window.addEventListener("devicemotion", handleMotion);
         window.addEventListener("deviceorientation", handleOrientation);
