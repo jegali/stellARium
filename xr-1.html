@@ -49,21 +49,61 @@
 			scene.add(light);
 
 			//const geometry = new THREE.IcosahedronGeometry(0.1, 1);
-			const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-			const material = new THREE.MeshPhongMaterial({
-				color      :  new THREE.Color("rgb(226,35,213)"),
+			const northGeometry = new THREE.BoxGeometry( 0.2, 0.2, 0.2 );
+			const greenMaterial = new THREE.MeshPhongMaterial({
+				color      :  new THREE.Color("rgb(0,200,0)"),
 				shininess  :  6,
 				flatShading:  true,
 				transparent: 1,
 				opacity    : 0.8
 			});
+
+			const eastGeometry = new THREE.BoxGeometry( 0.2, 0.2, 0.2 );
+			const redMaterial = new THREE.MeshPhongMaterial({
+				color      :  new THREE.Color("rgb(200,0,0)"),
+				shininess  :  6,
+				flatShading:  true,
+				transparent: 1,
+				opacity    : 0.8
+			});
+
+			const southGeometry = new THREE.BoxGeometry( 0.2, 0.2, 0.2 );
+			const yellowMaterial = new THREE.MeshPhongMaterial({
+				color      :  new THREE.Color("rgb(200,200,0)"),
+				shininess  :  6,
+				flatShading:  true,
+				transparent: 1,
+				opacity    : 0.8
+			});
+
+			const westGeometry = new THREE.BoxGeometry( 0.2, 0.2, 0.2 );
+			const blueMaterial = new THREE.MeshPhongMaterial({
+				color      :  new THREE.Color("rgb(0,0,200)"),
+				shininess  :  6,
+				flatShading:  true,
+				transparent: 1,
+				opacity    : 0.8
+			});
+
       
 	        centerGeometry = new THREE.Group();
 			centerGeometry.position.set(0,0,0);
 	  
-			mesh = new THREE.Mesh(geometry, material);
-			mesh.position.set(0, 0, -1);
-			centerGeometry.add(mesh);
+			northMesh = new THREE.Mesh(northGeometry, greenMaterial);
+			northMesh.position.set(-1, 0, 0);
+			centerGeometry.add(northMesh);
+
+			eastMesh = new THREE.Mesh(eastGeometry, redMaterial);
+			northMesh.position.set(0, 0, -1);
+			centerGeometry.add(eastMesh);
+
+			southMesh = new THREE.Mesh(southGeometry, yellowMaterial);
+			southMesh.position.set(1, 0, 0);
+			centerGeometry.add(southMesh);
+
+			westMesh = new THREE.Mesh(westGeometry, blueMaterial);
+			westMesh.position.set(0, 0, 1);
+			centerGeometry.add(westMesh);
 			
 			scene.add(centerGeometry);
 
