@@ -10,6 +10,15 @@
 </head>
 
 <body>
+
+	<h4 style="margin-top:0.75rem;">Orientation</h4>
+	<ul>
+	  <li>X-axis (&beta;): <span id="Orientation_b">0</span><span>&deg;</span></li>
+	  <li>Y-axis (&gamma;): <span id="Orientation_g">0</span><span>&deg;</span></li>
+	  <li>Z-axis (&alpha;): <span id="Orientation_a">0</span><span>&deg;</span></li>
+	</ul>
+
+
 	<script type="module">
     // To start an AR scene with webXR, we can use a handy button provided by three.js
     // We first have to import it because it is a javascript module
@@ -28,6 +37,11 @@
 			updateFieldIfNotNull('Orientation_b', event.beta);
 			updateFieldIfNotNull('Orientation_g', event.gamma);
 			incrementEventCount();
+		}
+
+		function updateFieldIfNotNull(fieldName, value, precision=10){
+			if (value != null)
+			document.getElementById(fieldName).innerHTML = value.toFixed(precision);	
 		}
 
 		function init() {
