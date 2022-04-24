@@ -76,12 +76,49 @@
 			updateFieldIfNotNull('Orientation_a', event.alpha);
 			updateFieldIfNotNull('Orientation_b', event.beta);
 			updateFieldIfNotNull('Orientation_g', event.gamma);
-			updateFieldIfNotNull('Orientation_heading', event.webkitCompassHeading);
 			alpha = event.alpha;
 			beta = event.beta;
 			gamma = event.gamma;
-			heading = event.webkitCompassHeading;
+			heading = compassHeading(event.alpha, event.beta, event.gamma);
+			updateFieldIfNotNull('Orientation_heading', heading);
 		}
+
+        const compassHeading = (alpha, beta, gamma) => {
+
+			// Convert degrees to radians
+			const alphaRad = alpha * (Math.PI / 180);
+			const betaRad = beta * (Math.PI / 180);
+			const gammaRad = gamma * (Math.PI / 180);
+
+			// Calculate equation components
+			const cA = Math.cos(alphaRad);
+			const sA = Math.sin(alphaRad);
+			const cB = Math.cos(betaRad);
+			const sB = Math.sin(betaRad);
+			const cG = Math.cos(gammaRad);
+			const sG = Math.sin(gammaRad);
+
+			// Calculate A, B, C rotation components
+			const rA = - cA * sG - sA * sB * cG;
+			const rB = - sA * sG + cA * sB * cG;
+			const rC = - cB * cG;
+
+			// Calculate compass heading
+			let compassHeading = Math.atan(rA / rB);
+
+			// Convert from half unit circle to whole unit circle
+			if(rB < 0) {
+				compassHeading += Math.PI;
+			}else if(rA < 0) {
+				compassHeading += 2 * Math.PI;
+			}
+
+			// Convert radians to degrees
+			compassHeading *= 180 / Math.PI;
+
+			return compassHeading;
+		};
+		
 
 		function handleMotion(event) {
 		  //updateFieldIfNotNull('Accelerometer_gx', event.accelerationIncludingGravity.x);
@@ -224,7 +261,7 @@
 	  <li>X-axis (&beta;): <span id="Orientation_b">0</span><span>&deg;</span></li>
 	  <li>Y-axis (&gamma;): <span id="Orientation_g">0</span><span>&deg;</span></li>
 	  <li>Z-axis (&alpha;): <span id="Orientation_a">0</span><span>&deg;</span></li>
-	  <li>compassHeading (&webkitCompassHeading;): <span id="Orientation_heading">0</span><span>&deg;</span></li>
+	  <li>compassHeading: <span id="Orientation_heading">0</span><span>&deg;</span></li>
 	</ul>
 	</div>
 	
