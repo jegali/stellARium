@@ -35,6 +35,10 @@
 				banner.onclick = ClickRequestDeviceMotionEvent // You NEED to bind the function into a onClick event. An artificial 'onClick' will NOT work.
 				document.querySelector('body').appendChild(banner)
 			}
+			else {
+				window.addEventListener('devicemotion',handleMotion);
+				window.addEventListener('deviceorientation',handleOrientation);				
+			}
 		}
 
 		function ClickRequestDeviceMotionEvent () {
