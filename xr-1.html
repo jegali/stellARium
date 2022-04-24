@@ -171,7 +171,9 @@
 			
 			scene.add(centerGeometry);
 
-			centerGeometry.rotation.y = event.alpha;
+			if (event != null) {
+				centerGeometry.rotation.y = event.alpha;
+			}
 
 			// Add the AR button to the body of the DOM
 			document.body.appendChild(ARButton.createButton(renderer));
