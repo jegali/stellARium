@@ -204,19 +204,19 @@
 			centerGeometry.position.set(0,0,0);
 	  
 			northMesh = new THREE.Mesh(northGeometry, greenMaterial);
-			northMesh.position.set(-1, 0, 0);
+			northMesh.position.set(-10, 0, 0);
 			centerGeometry.add(northMesh);
 
 			eastMesh = new THREE.Mesh(eastGeometry, redMaterial);
-			eastMesh.position.set(0, 0, -1);
+			eastMesh.position.set(0, 0, -10);
 			centerGeometry.add(eastMesh);
 
 			southMesh = new THREE.Mesh(southGeometry, yellowMaterial);
-			southMesh.position.set(1, 0, 0);
+			southMesh.position.set(10, 0, 0);
 			centerGeometry.add(southMesh);
 
 			westMesh = new THREE.Mesh(westGeometry, blueMaterial);
-			westMesh.position.set(0, 0, 1);
+			westMesh.position.set(0, 0, 10);
 			centerGeometry.add(westMesh);
 			
 			scene.add(centerGeometry);
