@@ -68,8 +68,8 @@
 			})			
 		}	
 
-		var magnetoSensor = new Magnetometer();
-		magnetoSensor.start();
+		//var magnetoSensor = new Magnetometer();
+		//magnetoSensor.start();
 
 		init();
 		animate();
@@ -84,8 +84,8 @@
 			heading = compassHeading(event.alpha, event.beta, event.gamma);
 			updateFieldIfNotNull('Orientation_heading', heading);
 			
-			var magHeading = Math.atan2(magnetoSensor.y, magnetoSensor.x) * (180 / Math.PI);
-			updateFieldIfNotNull('Orientation_headingmag', magHeading);			
+			//var magHeading = Math.atan2(magnetoSensor.y, magnetoSensor.x) * (180 / Math.PI);
+			//updateFieldIfNotNull('Orientation_headingmag', magHeading);			
 		}
 
         const compassHeading = (alpha, beta, gamma) => {
