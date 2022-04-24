@@ -24,7 +24,7 @@
 		let centerGeometry;
         let mesh;
         let northMesh, eastMesh, southMesh, westMesh;
-        var alpha=0, beta=0, gamma=0;
+        var alpha=0, beta=0, gamma=0, heading = 0;
 
 		window.onload = function () {
 			// Check if is IOS 13 when page loads.
@@ -76,9 +76,11 @@
 			updateFieldIfNotNull('Orientation_a', event.alpha);
 			updateFieldIfNotNull('Orientation_b', event.beta);
 			updateFieldIfNotNull('Orientation_g', event.gamma);
+			updateFieldIfNotNull('Orientation_heading', event.webkitCompassHeading);
 			alpha = event.alpha;
 			beta = event.beta;
 			gamma = event.gamma;
+			heading = event.webkitCompassHeading;
 		}
 
 		function handleMotion(event) {
@@ -222,6 +224,7 @@
 	  <li>X-axis (&beta;): <span id="Orientation_b">0</span><span>&deg;</span></li>
 	  <li>Y-axis (&gamma;): <span id="Orientation_g">0</span><span>&deg;</span></li>
 	  <li>Z-axis (&alpha;): <span id="Orientation_a">0</span><span>&deg;</span></li>
+	  <li>compassHeading (&webkitCompassHeading;): <span id="Orientation_heading">0</span><span>&deg;</span></li>
 	</ul>
 	</div>
 	
