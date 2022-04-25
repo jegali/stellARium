@@ -1,0 +1,86 @@
+<html>
+
+  <head>
+    <title> Compass </title>
+  </head>
+
+  <body>
+    <h1>Compass</h1>
+    <div class="orientation-data">
+      <div>Alpha: <span id="alpha"></span></div>
+      <div>Beta: <span id="beta"></span></div>
+      <div>Gamma: <span id="gamma"></span></div>
+      <div>Heading: <span id="heading"></span></div>
+    </div>
+
+    <div id="notice"></div>
+
+    <div id="location"></div>
+
+    <br/><br/><br/>
+
+    <button class="start-btn">Start compass</button>
+
+    <script>
+      var div  = document.getElementById("location");
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else {
+          div.innerHTML = "The Browser Does not Support Geolocation";
+        }
+      }
+
+      function showPosition(position) {
+        div.innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
+      }
+
+      function showError(error) {
+        if(error.PERMISSION_DENIED){
+          div.innerHTML = "The User have denied the request for Geolocation.";
+        }
+      }
+      getLocation();
+    </script>
+
+	
+ <script>
+          const startBtn = document.querySelector(".start-btn");
+          const isIOS = navigator.userAgent.match(/(iPod|iPhone|iPad)/) && navigator.userAgent.match(/AppleWebKit/);
+
+          function init() {
+            startBtn.addEventListener("click", startCompass);
+            //navigator.geolocation.getCurrentPosition(locationHandler);
+
+            if (!isIOS) {
+              window.addEventListener("deviceorientationabsolute", handler, true);
+            }
+          }
+
+          function startCompass() {
+                if (isIOS) {
+                  DeviceOrientationEvent.requestPermission()
+                        .then((response) => {
+                          if (response === "granted") {
+                                window.addEventListener("deviceorientation", handler, true);
+                          } else {
+                                alert("has to be allowed!");
+                          }
+                        })
+                        .catch(() => alert("not supported"));
+                }
+          }
+
+          function handler(e) {
+        compass = e.webkitCompassHeading || Math.abs(e.alpha - 360);
+                document.getElementById('alpha').innerHTML = (e.alpha / 100) * 100;
+                document.getElementById('beta').innerHTML = (e.beta / 100) * 100;
+                document.getElementById('gamma').innerHTML = (e.gamma / 100) * 100;
+                document.getElementById("heading").innerHTML = compass;
+          }
+
+          init();
+        </script>
+
+  </body>
+</html>
